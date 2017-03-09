@@ -34,3 +34,7 @@ $app->post('/admin/subirxml', function ($request, $response, $args) use ($servic
     return $this->view->fetch('xmlsubido.twig.php',$data);
 })->setName('subirxmlpost');
 
+$app->get('/admin/subirusuarios', function ($request, $response, $args) {
+    //ruta get de subir usuarios
+    return $this->view->fetch('subirusuarios.twig.php');
+})->setName('subirusuariosget');
