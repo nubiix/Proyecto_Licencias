@@ -31,33 +31,32 @@ class __TwigTemplate_9fb6965b5bba2ed1b2834ea59c0cb5a951cdab1c9fbc7e2a94911b58dc9
         echo "<div class=\"col-xs-3\"></div>
 <div class=\"col-xs-6\">
 \t<div class=\"row\">
-\t\t<h1>XML que acabas de subir</h1>
+\t\t<h1>El XML se ha subido correctamente</h1>
 \t</div>
 \t<div class=\"row\">
-\t\t<h1>";
+\t\t<h2>Para el sistema: ";
         // line 12
         echo twig_escape_filter($this->env, ($context["nombre"] ?? null), "html", null, true);
-        echo "</h1>
+        echo "</h2>
 \t</div>
 \t<div class=\"row\">
 \t\t ";
         // line 15
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(($context["k"] ?? null));
-        foreach ($context['_seq'] as $context["_key"] => $context["j"]) {
+        $context['_seq'] = twig_ensure_traversable(($context["keys"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["k"]) {
             // line 16
-            echo "\t\t\t<p>";
-            echo twig_escape_filter($this->env, $context["j"], "html", null, true);
-            echo "</p>
+            echo "\t\t\t<h3>Clave: ";
+            echo twig_escape_filter($this->env, $context["k"], "html", null, true);
+            echo "</h3>
 \t\t";
         }
         $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['j'], $context['_parent'], $context['loop']);
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['k'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 17
         echo " 
 \t</div>
-\t
 </div>
 <div class=\"col-xs-3\"></div>
 ";
@@ -96,17 +95,16 @@ class __TwigTemplate_9fb6965b5bba2ed1b2834ea59c0cb5a951cdab1c9fbc7e2a94911b58dc9
 <div class=\"col-xs-3\"></div>
 <div class=\"col-xs-6\">
 \t<div class=\"row\">
-\t\t<h1>XML que acabas de subir</h1>
+\t\t<h1>El XML se ha subido correctamente</h1>
 \t</div>
 \t<div class=\"row\">
-\t\t<h1>{{ nombre }}</h1>
+\t\t<h2>Para el sistema: {{ nombre }}</h2>
 \t</div>
 \t<div class=\"row\">
-\t\t {% for j in k %}
-\t\t\t<p>{{ j }}</p>
+\t\t {% for k in keys %}
+\t\t\t<h3>Clave: {{ k }}</h3>
 \t\t{% endfor %} 
 \t</div>
-\t
 </div>
 <div class=\"col-xs-3\"></div>
 {% endblock %}", "xmlsubido.twig.php", "C:\\wamp64\\www\\proyecto_final\\templates\\xmlsubido.twig.php");

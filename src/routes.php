@@ -1,54 +1,36 @@
 <?php
 // Routes
-/*
-$app->get('/[{name}]', function ($request, $response, $args) {
-    // Sample log message
-    //$this->logger->info("Slim-Skeleton '/' route");
-	//$data = array ('nombre' => $name);
-    // Render index view
-    return $this->view->fetch('plantillabase.twig.php', $args);
-});
-*/
+
 $app->get('/', function ($request, $response, $args) {
-    // Sample log message
-    //$this->logger->info("Slim-Skeleton '/' route");
-	//$data = array ('nombre' => $name);
-    // Render index view
+    //pagina principal/login
     return $this->view->fetch('login.twig.php', $args);
 })->setName('login');
 
 $app->get('/acercade', function ($request, $response, $args) {
-    // Sample log message
-   // $this->logger->info("Slim-Skeleton '/' route");
-
-    // Render index view
+    //ruta acerca de
     return $this->view->fetch('acercade.twig.php');
 })->setName('acercade');
 
 $app->get('/admin/subirxml', function ($request, $response, $args) {
-    // Sample log message
-   // $this->logger->info("Slim-Skeleton '/' route");
-
-    // Render index view
+    //ruta get de subir xml
     return $this->view->fetch('subirxml.twig.php');
 })->setName('subirxmlget');
 
-$app->post('/admin/subirxml', function ($request, $response, $args) use ($service){
-	move_uploaded_file($_FILES['subirxml']['tmp_name'],
-        "../assert/ficherosxml/temp.xml");
+$app->post('/admin/subirxml', function ($request, $response, $args) use ($service, $model){
+	//cargamos el fichero xml y lo procesamos 
+    move_uploaded_file($_FILES['subirxml']['tmp_name'],"../assert/ficherosxml/temp.xml");
 	$xml=simplexml_load_file("../assert/ficherosxml/temp.xml") or die("Error: Cannot create object");
-	/*$array=json_decode($xml);
-	print_r($array);*/
+    //
 	$nombreLote = $xml->Product_Key["Name"];
-	$arrayskey=array();
+	$arrayKeys=array();
 	foreach ($xml->Product_Key->Key as $keys) {
 		$texto=(string)$keys;
-		//var_dump($texto);
-		array_push($arrayskey, $texto);
+		array_push($arrayKeys, $texto);
 	}
-	//print_r($arrayskey);
-	$data=array('nombre'=>$nombreLote,
-				'k'=>$arrayskey);
+    //llamada modelo para insertar claves
+	$model->insertar_claves($nombreLote, $arrayKeys);
+    //guardando en data las claves para pasarlas a la vista
+	$data=array('nombre'=>$nombreLote,'keys'=>$arrayKeys);
     return $this->view->fetch('xmlsubido.twig.php',$data);
 })->setName('subirxmlpost');
 

@@ -10,6 +10,7 @@ if (PHP_SAPI == 'cli-server') {
 }
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../model/Claves_Model.php';
 
 session_start();
 
@@ -17,6 +18,7 @@ session_start();
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);
 $service = new Sabre\Xml\Service();
+$model = new Claves_Model();
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
